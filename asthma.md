@@ -1,0 +1,44 @@
+# The Unscientific Asthmatic
+
+I've had Asthma for some 30 years now.  I'm writing this as of age 38.  It all started suddenly one day, I just didn't feel good and it was an entirely new feeling for me, so all my mother and father could do was to tell me to lie down in bed, which was actually making it harder to breathe, but we didn't know what it was at the time.  I just knew that I was having trouble breathing, it was like my lungs couldn't process enough oxygen, each breath felt like i was being strangled (not so much the pain as what I'd imagine would be from fingers encircling and crushing your throat, but more so the lack of oxygen).  The difficulty is in two parts, one in inhaling air, the other is in exhaling.  I am writing this such that I might be able to help those in the future to understand this terrible disease and to provide hopefully some understanding into the triggers and some of my methods for coping with Asthma.
+
+## Meet One of Asthma's Best Friends', Hello Eczema!
+Let's start from an even younger age, even before Asthma I had Eczema, this is a terrible skin affliction that causes rashes triggered by certain allergens, some are triggered through the foods you eat, some are environmental, and even others are from the compounds in your daily products.  I can't remember exactly when I first had Eczema, but let's just assume that this happened when I could first remember.  So you can take a whole spate of allergy tests, basically a set of small skin pricks laid out on your forearm like a grid, the first time I tried this they had probably 30 or so allergens in liquid form for what I'm guessing were the common allergens at the time (~1985): (chicken) egg, oranges, shrimp, pet dander, rag weed, pollen, dust mites, etc.  once pricked with these needles, the allergens need some time for a reaction (say 10 minutes), some allergens cause more immediate effects than others, but this part has always been quite crude, a nurse basically comes in to physically inspect the size of the bumps for where the allergens were injected.  I remember some bumps to be pretty massive, like a massive mosquito bite maybe protruding some 2mm from the surface of the skin, but others were barely detectable, maybe just a small bump, and if you have no allergic reaction then just a hole where they punctured your skin.  I have taken allergy tests probably 7-8 times in my life with varying results.  I can't remember the specifics from my first visit other than that I was prescribed to have allergies to oranges at that time, the best way to avoid allergic reactions--avoid the allergen.  That's the thing with atopical allergies, there seems to be no immediate cure, but there are several methods:
+
+1.  Avoiding the allergen
+1.  Atopical cream - this seems to have more immediate effects to contain the situation, but this works only temporarily
+1.  Allergy shots - 2 years typically, every week, x number of shots, I believe this method is based on increased exposure to the allergen such that your immune system learns to deal with the allergen.
+1.  Time - sometimes allergies disappear over time, I guess time really does heal all.
+
+So basically there was a point in my life where I avoided eating oranges until the next set of allergy tests cleared me from this allergen probably a few years later, these things seems to change/morph over time.  From what I vaguely remember from my *research* on the web, allergies are actually an over-reaction of the immune system, the immune system falsely identifies something as a threat and reacts to it in the way that it knows how, in my case rashes.  Time and time again, I've heard from various doctors that Eczema and Asthma typically go hand in hand, more so that if you have Eczema, there's a great chance that you'll also have Asthma, but not the other way around, if you have Asthma, you might not have Eczema, so don't worry, but I just want to provide full disclosure.
+
+## Pedigree
+
+Somewhat tangential, but my mother passed away at an early age (~60) from Breast Cancer, and it was only until then that I realized how important it is to understand your family's medical history, quite unfortunately.  But my mother and father, and their mothers and fathers each did not have Asthma or Eczema.  In fact, none of my father's 4 siblings and mother's 6 siblings had either, how strange!  But my father once told me that he vaguely remembered that an Aunt of his (blood relative) had Asthma.  In my father's later years (>60), I observed that he also started to develop some rashes on his skin, seemingly because of dryness, but I'm certain that there's some allergen that's triggering his reactions.  Other than that, my sister, my daughter who's 4 now, so far, don't seem to have Eczema or Asthma.
+
+## _Sucks to your Asthmar_
+
+When I was first diagnosed with Asthma, I remembered specifically that the doctor mentioned that I had exercise induced Asthma, meaning that whenever I went out for daily activities at school, like soccer or jogging, I'd start having Asthma attacks.  These attacks would nearly floor me, my first reaction was to put my hands on my knees because I just couldn't get enough oxygen, it was like running a marathon at full sprint from just having run 10 meters.  My parents didn't really pro-actively try to engage with the school to limit my exercise, which in a sense was good, but I really got winded everyday at school during physical education.  Now here's where the unscientific observations start to come out, but I also noticed that during changes in weather, either from cool to warm, cool to cold, seemed to cause specific bouts of Asthma, specifically during Spring and Fall, this maybe a mere coincidence perhaps due to pollen or ragweed, but certainly worth noting.  My allergy doctor also found out some time later that I was allergic to dust mites, basically these microscopic bugs in dust, this was sort of the end all allergen, oranges I could avoid eating with great disdain, but how in the world could I avoid dust?!  The prescription was to change bed sheets often and vacuum everywhere, all the time, curtains, carpet, bed sheets, pillows, etc, I can't remember if he recommended wearing a mask when outside, but this was the one allergen that nobody wanted.  I was also found to be allergic to pet dander, and I can tell you without having to be pricked with pet dander allergen that once I get into a house or apartment where a furry pet lives, everything goes wrong, the Asthma kicks in automatically, sneezing, coughing, watery eyes, etc, and it's quite immediate.  But that's not all, I also start wheezing if someone who's around furry animals often and has pet dander on their clothing, that seems to get me, too.  So these are the things that the allergy tests found that I was allergic to:
+
+Allergen | Observation
+--- | ---
+Oranges | After a year I was eating oranges without rashes.
+Dust Mites | Seems to cause Asthma as well, not so much rashes.
+Pollen | Not really a big deal for me, no rashes, perhaps triggers some Asthma, my father and sister have it worse than me.
+Pet Dander | Definitely, cats, dogs, rabbits, gerbils, etc.
+
+All in all, I don't find allergy tests to be that conclusive, you can't test for everything in the environment or foods that you eat, at least no doctor i've visited has done so, but here are my observations:
+
+Allergen | Observation
+--- | ---
+Strong smells | Cigarettes seem to sometimes cause Asthma attacks, same with scented candles, perfume, smoke from a fire.
+Chicken egg/Chicken | Instant rashes, could last for a couple days at least.  Odd thing is that duck eggs seem to not trigger an allergic reaction.  Haven't observed any differences between white and yellow chicken egg and this one's hard to avoid because cake, ice cream, caesar salad dressing, mayonaise all contain egg, and I eat these, just because I like the taste.
+Seafood | Gross simplification, but shelled seafood like crabs, lobster, shrimp and some cephalopods like squids, octopus, I'm pretty sure clams, mussels, scallops, etc.  I found that not only salt-water breeds of these, but also fresh-water.  This ranks with chicken egg, major rashes.  Fish seems ok, fresh water or salt water based, haven't tested all of these out.
+Lamb meat | Skin rashes
+Dishwasher detergent | Seems to get my Eczema embroiled, I try to avoid hand washing dishes without gloves.
+Certain soaps | Ivory, Irish Spring, those that seem to have high PH balances, I have tried some of those non-PH based soaps with good effect.
+Certain lotions | I generally have dry skin, so it makes my skin more itchy in general, but I seem to have issues with certain lotions, not all identified, I try to avoid most of these.
+
+# Modern Medication
+
+I have used inhalers for Asthma since they were in trial form, I believe.  Inhalers are really bad in general as if I recall correctly they seem to thin out the bones.
