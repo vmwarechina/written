@@ -9,7 +9,8 @@ Let's start from an even younger age, even before Asthma I had Eczema, this is a
 1.  Atopical cream - this seems to have more immediate effects to contain the situation, but this works only temporarily
 1.  Allergy shots - 2 years typically, every week, x number of shots, I believe this method is based on increased exposure to the allergen such that your immune system learns to deal with the allergen.
 1.  Time - sometimes allergies disappear over time, I guess time really does heal all.
-
+1.  Inhibitor pills like benadryl [sic]
+  
 So basically there was a point in my life where I avoided eating oranges until the next set of allergy tests cleared me from this allergen probably a few years later, these things seems to change/morph over time.  From what I vaguely remember from my *research* on the web, allergies are actually an over-reaction of the immune system, the immune system falsely identifies something as a threat and reacts to it in the way that it knows how, in my case rashes.  Time and time again, I've heard from various doctors that Eczema and Asthma typically go hand in hand, more so that if you have Eczema, there's a great chance that you'll also have Asthma, but not the other way around, if you have Asthma, you might not have Eczema, so don't worry, but I just want to provide full disclosure.
 
 ## Pedigree
@@ -37,10 +38,19 @@ Seafood | Gross simplification, but shelled seafood like crabs, lobster, shrimp 
 Lamb meat | Skin rashes
 Peanuts | Anything in the nut family, this doesn't cause rashes per se, and I don't get to the point where my entire throat is swollen, but this seems to trigger more phlegm which seems to trigger more asthma attacks.  Sunflower seeds which aren't in the nut family, but seems to also trigger Phlegm/Asthma.
 Chocolate | Love chocolate, but seems similar to peanuts, this triggers more phlegm which triggers more asthma attacks.
+Cold Beverages | More on this below.  But alcoholic based and normal juices, sodas.
 Dishwasher detergent | Seems to get my Eczema embroiled, I try to avoid hand washing dishes without gloves.
 Certain soaps | Ivory, Irish Spring, those that seem to have high PH balances, I have tried some of those non-PH based soaps with good effect.
 Certain lotions | I generally have dry skin, so it makes my skin more itchy in general, but I seem to have issues with certain lotions, not all identified, I try to avoid most of these.
 
-# Modern Medication
+# Medication
 
-I have used inhalers for Asthma since they were in trial form, I believe.  Inhalers are really bad in general as if I recall correctly they seem to thin out the bones.
+I have used inhalers for Asthma since they were in trial form, I believe.  Inhalers are really bad in general as if I recall correctly they seem to thin out the bones if used often, I'm sure that there are other bad side effects.  But sometimes the most immediate fix for Asthma is to take a few puffs, there were times in my life where I'd have to use an inhaler 3-5 times a day.  There were also  occasions where I had too much phelgm in my lungs that the inhaler didn't have any effect at which point it was a hospital visit with a ventilator and possibly iv fluid, but that's happened only once or twice in my life.  Typically I was prescribed prednisone to reduce the phelgm build up in my lungs, but I understand that this to be a steroid type, not good for the body, not good for eyesight, I believe.  There were inhalers that were more preventative, I seem to remember one where it looked like a white periscope, you basically pull out this tube from the inhaler that then gets locked into an L shape.  This was supposed to be used 1-3 times a day to prevent Asthma attacks, didn't seem to work that well.
+
+# Other Asthma Triggers
+
+This is a strange one, but having grown up in the United States, and lived abroad in Asia, I've found a few perhaps useful pieces of information towards understanding the triggers for some forms of Asthma.  In Asia, typically people drink warm beverages, tea, hot water, in the US, we drink a lot of ice cold beverages, this is throughout the year, sure coffee's become popular, but mostly people want cold beverages.  In many parts of Asia, there's a negative perception of drinking cold drinks, seems to harm the body.  After cracking down personally on cold beverages, it seemed to reduce some level of my Asthma attacks.  Of course in the dead of summer, it's hard to drink warm/hot drinks and there's really no better way to cool off the body.
+
+# Things that have Helped
+
+Exercise
