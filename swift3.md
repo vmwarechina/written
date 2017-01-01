@@ -4,19 +4,19 @@ I've read several articles on migrating to Swift 3 which are all quite good, but
 
 So that first experience caused me to give up and go back to adding features to my app instead.  But over the Christmas Holidays, I decided that it was time to bite the bullet and take care of this technical debt so that I could run full speed in 2017!  For some reason, I looked at all the github pages again for my external dependencies and all the github issues searching for Swift 3 and they all confirmed that they mostly had support for this, which cleared some of my doubts, so I tried again.  And again, the popup with all the frameworks checked by default showed up again and this time, what's typically my last resort, it was trial and error time, I decided to uncheck all the external libraries because they _should_ all be Swift 3 compatible, I was seeing some glaring 2.3 code from the conversion diff output, it was like the source code was cached somewhere for an older version that wasn't Swift 3 compatible (I deleted my Pods directory several times to make certain that I had the latest external depedency sources).  Low and behold that worked like a charm, what I was left with was the mess of code from my own source tree that needed to be converted to Swift 3 compatible syntax, rock on!
 
-Most of my code conversions were changes to names of functions, like Alamofire, for instance, used to call something like this to get a singleton of the Alamofire instance:
-
-`let web = Alamofire.Manager.session`
-
-And this is the new code under Swift 3
+Most of my code conversions were changes to variables, like Alamofire, for instance, used to call something like this to get a singleton of the Alamofire instance:
 
 `let web = Alamofire.SessionManager.sharedInstance`
 
-Not entirely intuitive, but easy to fix with a find/replace.  The next type of conversions that seemed frequent were for things like requiring a key for each parameter passed into a function, it used to be that you could omit the very first parameter key, but Swift 3 does not like this very much, in fact it hates it and will hate you and never let you compile the code successfully in a million years or until you fix it!
+And this is the new code under Swift 3
+
+`let web = Alamofire.Manager.session`
+
+Not entirely intuitive, but easy to fix with a find/replace.  The next type of conversions that seemed frequent were for things like requiring a key for each parameter passed into a function, it used to be that you could omit the very first parameter key, but Swift 3 does not like this very much, in fact it hates it and will hate you and never let you compile the code successfully in a million years or until you fix it.
 
 I also ran into several issues where a class lowercased its enum list like for UIAlertActionStyle and UIAlertControllerStyle, but those were trivial.
 
-I went through this motion for about 2 hours, Alamofire was the most widely used external library and they had changed the way they handle responses that do not include data, this tripped me up a little bit at first, but most everything else was simple.  One thing of note to point out is that the compilation errors which ranged in the triple digits, only showed something like 10 at a time, after I fixed those, Xcode would give me the next 10 or so, I didn't explicitly count, but I really think it was around 10 or so, why Xcode just didn't give me the 100 or so errors all at once, I do not know, it seems like one of those glass half full things, so fine, whatever, don't have the time to figure that out, just move on.  Eventually the compiler was happy, save for those hundred or so warnings from my storyboard regarding `Frame for "Stack View" will be different at run time.`.  There were some other subtle errors that I did have to clean up as a result of the conversion, but where I was initializing some associative array like such:
+I went through this motion for about 2 hours, Alamofire was the most widely used external library and had changed the way responses that do not include data were handled, this tripped me up a little bit at first, but most everything else was simple.  SwiftWebsockets didn't require any changes, another thing to note is that the compilation errors which ranged in the triple digits, only showed something like 10 at a time, after I fixed those, Xcode would give me the next 10 or so, I didn't explicitly count, but I really think it was around 10 or so, why Xcode just didn't give me the 100 or so errors all at once, I don't know, perhaps it's one of those glass half full things, so fine, whatever, don't have the time to figure that out, just move on.  Eventually the compiler was happy, save for those hundred or so warnings from my storyboard regarding `Frame for "Stack View" will be different at run time.`.  There were some other subtle errors that I did have to clean up as a result of the conversion where I was initializing some associative array like such:
 
 ```
 let game = [String: String]()
@@ -24,4 +24,4 @@ let game = [String: String]()
 return game["id": self.data[indexPath.items][0], "name": self.data[indexPath.items][1]]
 ```
 
-The error was along the lines of this operation taking too long to complete, suggesting that I find another way.
+The error was along the lines of this operation takes too long to complete, suggesting that I find another way.
