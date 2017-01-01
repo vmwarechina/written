@@ -6,22 +6,47 @@ So that first experience caused me to give up and go back to adding features to 
 
 Most of my code conversions were changes to variables, like Alamofire, for instance, used to call something like this to get a singleton of the Alamofire instance:
 
-`let web = Alamofire.SessionManager.sharedInstance`
+`let web = Alamofire.Manager.sharedInstance`
 
 And this is the new code under Swift 3
 
-`let web = Alamofire.Manager.session`
+`let web = Alamofire.SessionManager.default`
 
-Not entirely intuitive, but easy to fix with a find/replace.  The next type of conversions that seemed frequent were for things like requiring a key for each parameter passed into a function, it used to be that you could omit the very first parameter key, but Swift 3 does not like this very much, in fact it hates it and will hate you and never let you compile the code successfully in a million years or until you fix it.
+Not entirely intuitive, but easy to fix with find/replace.  The next type of conversions that seemed frequent were for things like requiring a key for each parameter passed into a function, it used to be that you could omit the very first parameter key, but Swift 3 does not like this very much, in fact it hates it and will hate you and never let you compile the code successfully in a million years or until you fix it.
 
 I also ran into several issues where a class lowercased its enum list like for UIAlertActionStyle and UIAlertControllerStyle, but those were trivial.
 
-I went through this motion for about 2 hours, Alamofire was the most widely used external library and had changed the way responses that do not include data were handled, this tripped me up a little bit at first, but most everything else was simple.  SwiftWebsockets didn't require any changes, another thing to note is that the compilation errors which ranged in the triple digits, only showed something like 10 at a time, after I fixed those, Xcode would give me the next 10 or so, I didn't explicitly count, but I really think it was around 10 or so, why Xcode just didn't give me the 100 or so errors all at once, I don't know, perhaps it's one of those glass half full things, so fine, whatever, don't have the time to figure that out, just move on.  Eventually the compiler was happy, save for those hundred or so warnings from my storyboard regarding `Frame for "Stack View" will be different at run time.`.  There were some other subtle errors that I did have to clean up as a result of the conversion where I was initializing some associative array like such:
+I went through this motion for about 2 hours, I have about 30 swift files.  Alamofire was the most widely used external library and had changed the way responses that do not include data were handled, this tripped me up a little bit at first, the documentation was not succinct so I had to resort to stackoverflow, but most everything else was simple.  SwiftWebsockets didn't require any changes, another thing to note is that the compilation errors which ranged in the triple digits only showed something like 10 at a time, after I fixed those, Xcode would give me the next 10 or so, I didn't explicitly count, but I really think it was around 10 or so, why Xcode just didn't give me the 100 or so errors all at once, I don't know, perhaps it's one of those glass half full things, so fine, whatever, don't have the time to figure that out, just move on.  Eventually the compiler was happy, save for those hundred or so warnings from my storyboard regarding `Frame for "Stack View" will be different at run time.`.  There were some other subtle errors that I did have to clean up as a result of the conversion where I was initializing some associative array like such:
 
 ```
-let game = [String: String]()
+var game = [String: String]()
 
 return game["id": self.data[indexPath.items][0], "name": self.data[indexPath.items][1]]
 ```
 
-The error was along the lines of this operation takes too long to complete, suggesting that I find another way.
+The error I received was "Expression was too complex to be solved in reasonable time."  Under 2.3 this was not a compile error and seemed to work fine, under 3.0 this was preventing me from successfully building.  I fixed this by unravelling the expression like so:
+
+```
+var game = [String: String]()
+
+game["id"] = self.data[indexPath.items][0]
+game["name"] = self.data[indexPath.items][1]
+
+return game
+```
+
+After all these changes, I was finally able to compile without any errors and build my archive.  Here's where things hit the fan, and I still don't know how I got through this, but I'll try to give you all the steps and missteps that I took.
+
+So the archive built fine, this was always the same process for me, make sure things compile fine with no errors, run automatic and manual tests to verify basic functionality.  If all looked good I'd then proceed with bumping the build number, changing the API urls (I have these stored in a swift file where I toggle between production and loopback for development, I have a backlog item to create different info.list files for production and development), setting the devices to **Generic iOS Device**, and build my archive.  When the archive's done, Xcode Organizer pops up and I upload the thing to the App Store.  I've successfully gone through this process multiple times, creating a release version through iTunes Connect and then waiting the 2 days for the app review process to take its course.  But suddenly under Xcode 8.2.1, I got this really ambiguous error message **ERROR ITMS-90046: "Invalid Code Signing Entitlements.  Your application bundle's signature contains code signing entitlements that are not supported on iOS.**.  The error code is specific enough, but I spent hours upon hours on google and stackoverflow, most of the advice can be summed up with the following bullets:
+
+* Project -> Clean, then restart Xcode, some responses even suggested restarting Mac OS X, I think...
+* Delete the ~/Library/Developer/Xcode/DerivedData contents which flushes the cache, some of the profiles get cached
+* Clear out Keychain entries for iOS Developer/Production Provisioning Profiles and associated private keys
+* Turn off/on Automatically manage signing under (Project Name) -> Target -> Signing
+* Delete/Revoke all certificates and provisioning profiles from developer.apple.com, recreate and import
+* Make certain the Bundle ID in the build settings and info.list are matching
+* Make certain the TEAMID is matching with the Bundle ID
+* Make modifications to Entitlements.list (never found this file)
+
+I also read a lot of horror stories about how this issue happened often with Xcode 4-6, but quite honestly in Xcode 7.x, I never ever ran into issues with code signing, it always just worked, I followed the instructions from the apple developer documentation the first time to set up certificates and profiles and it just worked smoothly after that, not one single issue, so this just baffled me, something was broken.  For the record, I did buy one of those new macbook pro touchbar laptops and imported a profile from another laptop, but I had done this successfully in the past, so that probably wasn't the issue, it probably has to do with this **Automatically manage signing** feature in Xcode 8.
+
