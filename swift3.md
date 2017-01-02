@@ -37,16 +37,54 @@ return game
 
 After all these changes, I was finally able to compile without any errors and build my archive.  Here's where things hit the fan, and I still don't know how I got through this, but I'll try to give you all the steps and missteps that I took.
 
-So the archive built fine, this was always the same process for me, make sure things compile fine with no errors, run automatic and manual tests to verify basic functionality.  If all looked good I'd then proceed with bumping the build number, changing the API urls (I have these stored in a swift file where I toggle between production and loopback for development, I have a backlog item to create different info.list files for production and development), setting the devices to **Generic iOS Device**, and build my archive.  When the archive's done, Xcode Organizer pops up and I upload the thing to the App Store.  I've successfully gone through this process multiple times, creating a release version through iTunes Connect and then waiting the 2 days for the app review process to take its course.  But suddenly under Xcode 8.2.1, I got this really ambiguous error message **ERROR ITMS-90046: "Invalid Code Signing Entitlements.  Your application bundle's signature contains code signing entitlements that are not supported on iOS.**.  The error code is specific enough, but I spent hours upon hours on google and stackoverflow, most of the advice can be summed up with the following bullets:
+So the archive built fine, this was always the same process for me, make sure things compile fine with no errors, run automatic and manual tests to verify basic functionality.  If all looked good I'd then proceed with bumping the build number, changing the API urls (I have these stored in a swift file where I toggle between production and development, I have a backlog item to create different info.list files for production and development), setting the devices to **Generic iOS Device**, and building my archive.  When the archive's done, the Xcode Organizer pops up and I upload the binaries to the App Store.  I've successfully gone through this process multiple times, creating a release version through iTunes Connect and then waiting the 2 days for the app review process to take its course.  But suddenly under Xcode 8.2.1, I got this really ambiguous error message **ERROR ITMS-90046: "Invalid Code Signing Entitlements.  Your application bundle's signature contains code signing entitlements that are not supported on iOS.**  The error code is specific enough, but I spent hours on google and stackoverflow, most of the advice can be summed up with the following bullets:
+
+_Be forewarned, use these at your discretion, there are good chances that these steps could alter your environment in a non-reversible way._
 
 * Project -> Clean, then restart Xcode, some responses even suggested restarting Mac OS X, I think...
 * Delete the ~/Library/Developer/Xcode/DerivedData contents which flushes the cache, some of the profiles get cached
+* Delete ~/Library/MobileDevice/Provisioning Profiles contents
 * Clear out Keychain entries for iOS Developer/Production Provisioning Profiles and associated private keys
 * Turn off/on Automatically manage signing under (Project Name) -> Target -> Signing
 * Delete/Revoke all certificates and provisioning profiles from developer.apple.com, recreate and import
 * Make certain the Bundle ID in the build settings and info.list are matching
 * Make certain the TEAMID is matching with the Bundle ID
 * Make modifications to Entitlements.list (never found this file)
+* Target -> (Project Name) -> Signing -> Code Signing Identity for Debug and Release use _iOS Developer_
+* Disable Associated Domains for the provisioning profile
 
-I also read a lot of horror stories about how this issue happened often with Xcode 4-6, but quite honestly in Xcode 7.x, I never ever ran into issues with code signing, it always just worked, I followed the instructions from the apple developer documentation the first time to set up certificates and profiles and it just worked smoothly after that, not one single issue, so this just baffled me, something was broken.  For the record, I did buy one of those new macbook pro touchbar laptops and imported a profile from another laptop, but I had done this successfully in the past, so that probably wasn't the issue, it probably has to do with this **Automatically manage signing** feature in Xcode 8.
+I also read a lot of horror stories about how this issue happened often with Xcode 4-6, but quite honestly in Xcode 7.x, I never ever ran into issues with code signing, it always just worked, I followed the instructions from the apple developer documentation the first time to set up certificates and profiles and it just worked smoothly after that, not one single issue, so this just baffled me, something was broken.  For the record, I did buy one of those new macbook pro touchbar laptops and imported my developer profile from another laptop, but I had done this successfully in the past, so that probably wasn't the issue, it probably has to do with this **Automatically manage signing** feature in Xcode 8.
+
+Anyhow, none of these worked for me and I was getting frustrated because I needed to release a new version of my app, so I started down all the different permutations of these changes.  Here's what seemingly worked for me:
+
+_Note:  use at your own discretion, may have non-reversible effects on your environment._
+
+1.  Delete/Revoke development/distribution certificates and provisioning profiles from developer.apple.com
+1.  Create new development/distribution certificates and provisioning profiles on developer.apple.com
+1.  Project -> Clean
+1.  Quit Xcode
+1.  Delete contents from ~/Library/Developer/Xcode/DerivedData
+1.  Delete contents from ~/Library/MobileDevice/Provisioning Profiles
+1.  Make certain iOS Developer was selected for Debug/Release for code signing identity in build settings of the target project, i didn't need to change these, this was already set correctly from 7.3
+1.  I found that my _Product Bundle Identifier_ under Target -> Build Settings -> Packaging had a lowercase version of my app, so I proper cased this
+1.  Open Xcode, open workspace
+1.  Build Archive
+1.  Upload the App Store
+
+Voila, no more code signing error messages, the archive was sent successfully!  However, from iTunes Connect, I couldn't find my build, the add build plus sign wasn't even visible to add a build to my release.  I was panicking that I had deleted my profile incorrectly which would cause me to have to open up a support ticket with Apple.  But later, I received an email from Apple stating that my build submission was missing a string in the info.list, particularly **NSPhotoLibraryUsageDescription**,
+I export photos the Photo Library and this message is needed by Xcode 8, apparently, not needed by Xcode 7.  If your app doesn't access the Photo Library then I think you're good, this was easy enough, rebuilt my archive with this change, uploaded to the App Store, and after 30 minutes or so, the build was available and addable to my release, and I was able to submit for review!  As of the time of writing this article, I am still waiting for my review to complete, but this seems normal thus far, will update you if that fails for whatever myriad of reasons.
+
+Overall, the update to Xcode 8.2 had resulted in me burning roughly 10 hours sifting through misleading forum suggestions and trying every permutation I could think of, not the best of experiences surely, and though I am a fan of the iOS development and I hope that the tools improve over time, this was painful, I lost a lot of productivity and do not think I'm any stronger as a result of this, except that my ego is even more inflated as I have solved the impossible yet again.
+
+_Before you click any of these, be forewarned, madness ensues..._
+
+* https://developer.apple.com/library/content/qa/qa1879/_index.html
+* https://developer.apple.com/library/content/documentation/General/Conceptual/DevPedia-CocoaCore/AppID.html
+* http://blog.bitrise.io/2016/09/21/xcode-8-and-automatic-code-signing.html
+* http://stackoverflow.com/questions/15881534/how-to-localize-nsphotolibraryusagedescription-key-alassets
+* http://stackoverflow.com/questions/39432242/nsphotolibraryusagedescription-in-xcode8
+* http://stackoverflow.com/questions/28106791/error-itms-90164-90046-invalid-code-signing-entitlements
+* http://stackoverflow.com/questions/29877677/apple-store-submit-fails-with-error-itms-90046-but-associated-domains-is-not-am
+* http://stackoverflow.com/questions/34905742/error-itms-90046-invalid-code-signing-entitlements
+* https://forums.developer.apple.com/thread/12758
 
