@@ -161,6 +161,13 @@ pi provides 4 usb ports.
 
 TODO: automating upgrades
 
+### media playback
+
+initially i was embedding video tags in my static html pages that would access the local media files on the raspberry pi device, i then 
+found out that hardware acceleration is not enabled for the ubuntu-mate build of chromium that means that high resolution video will be 
+extremely chopping and unviewable on raspberry pi's.  what i did find out is that there's a native compiled package as part of raspbian 
+and ported to ubuntu-mate called omxplayer, it's a command line tool.
+
 ### desktop background image
 
 ### startup screen
