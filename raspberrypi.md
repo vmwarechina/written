@@ -165,8 +165,11 @@ TODO: automating upgrades
 
 initially i was embedding video tags in my static html pages that would access the local media files on the raspberry pi device, i then 
 found out that hardware acceleration is not enabled for the ubuntu-mate build of chromium that means that high resolution video will be 
-extremely chopping and unviewable on raspberry pi's.  what i did find out is that there's a native compiled package as part of raspbian 
-and ported to ubuntu-mate called omxplayer, it's a command line tool.
+extremely choppy and unviewable on raspberry pi's.  what i did find out is that there's a natively compiled package as part of raspbian 
+that's also ported to ubuntu-mate called omxplayer, it's a command line tool which is perfect for my case as i could call this from my 
+static page/websocket server.
+
+omxplayer has a way to pipe in commands such as pausing the video, etc.
 
 ### desktop background image
 
