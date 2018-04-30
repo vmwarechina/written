@@ -73,28 +73,102 @@ which doesn't have a microsd reader so i had to go purchase a usb to microsd don
 cards, and other card formats.
 
 to get os images onto the raspberry pi, initially i used the dd command line tool, but i found a gui tool that works perfectly across 
-multiple platforms (linux, mac, windows) called [etcher][https://etcher.io/].  i highly recommend this tool, i think they also have a 
-hardware device that can simultaneously burn os images onto multiple microsd cards, you could build a mini-factory to ship large amounts 
+multiple platforms (linux, mac, windows) called [etcher](https://etcher.io/).  i highly recommend this tool, i think they also have a 
+hardware device that can burn os images onto multiple microsd cards in parallel, you could build a mini-factory to ship large amounts 
 of raspberry pi devices in this manner.
+
+the base ubuntu-mate image required a few additional packages to be installed:
+
+1.  `sudo apt-get install chromium-browser`
 
 ### backend server
 
 i had learned golang around the time i started this project and decided to create a websocket server to manage the clock/scoreboard, 
 this would allow clients to update and receive data asynchronously.  one really nice thing about golang is that you can compile and copy 
-a binary  directly to the target platform, you don't really need to install a golang compiler (or runtime) onto the device which would 
+a binary directly to the target platform, you don't really need to install a golang compiler (or runtime) onto the device which would 
 save me space and complexity (think upgrades to golang, having to have source code on the device itself, git pull's, etc).  all 
 persistent data is stored to an sqlite file, i didn't want to have another database process running as my data requirements are not 
 large, probably a few thousand to at most a million rows over 5 or so simple tables.
 
-there also needed to be a web server to serve up static pages, i just bundled this together with the golang websocket server.
+there also needed to be a web server to serve up static pages (html, css, js), i just bundled this together with the golang websocket 
+server.
 
-this backend server needs to be started automatically everytime the device is started or if the process crashes.  i leveraged systemd to 
-start the process automatically and restart if the process goes down.
+and last, but not least, this backend server needs to be started automatically everytime the device is started or if the process 
+crashes.  i leveraged systemd to start the process automatically and restart if the process goes down.  here's my systemd configuration 
+file from /etc/systemd/system/mboard.service
 
-### desktop browser
+```
+[Unit]
+Description=madsportslab mboard daemon
+After=network-online.target
 
-the goal of the device was to spin up linux really quickly, login, and start up chrome in full screen and point at the very first page 
-of the scoreboard.
+[Service]
+Type=simple
+WorkingDirectory=/home/mboard/bin
+ExecStart=/home/mboard/bin/mboard-go -mode 1 -database /home/mboard/data/mboard.db
+Restart=always
 
-to accomplish this, i had to first enable automatic login for this particular account and leverage xorg's desktop start commands.
+[Install]
+WantedBy=multi-user.target
+```
+
+you need to run a few commands to get this loaded by systemd
+
+`sudo systemctl enable mboard`
+`sudo systemctl start mboard`
+`sudo systemctl status mboard`
+
+### browser application startup
+
+the goal of the device is to spin up linux really quickly, automatically login so that there's no prompting for username/password, 
+start up chrome browser in full screen mode, and point at the very first page of the scoreboard.
+
+to accomplish this, i had to first enable automatic login for this particular account, this can be done from the ubuntu user and 
+password manager gui. 
+
+the next step is to add an xorg autostart configuration file into the account that gets logged into automatically.
+
+i added the file /home/mboard/.config/autostart/mboard.desktop
+
+```
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/chromium-browser --noerrdialogs --disable-session-crashed-bubble --disable-infobars --incognito --password-store=basic --kiosk http://127.0.0.1:8000/setup
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=mboard
+```
+
+### wifi router enablement
+
+in some basketball courts, there's a lack of broadband internet or cellular network, i.e. no wan access, so i had to accommodate for 
+these types of environments.  ubuntu comes with the ability to make your linux server into a wireless router with dhcp, in this manner, 
+if there's no wan or lan network, you could connect to the ssid of the device on your phone and control the device in this manner.
+
+for those environments with broadband and wifi available, the task becomes of connecting to the right ssid with the right credentials 
+and security protocols.  so how does this happen when you don't have a keyboard and mouse connected to the raspberry pi device?
+
+### upgrades
+
+again i have to accommodate for environments (courts) where there's no wan access, in this case, you still need to be able to upgrade 
+the device.  if the cellular network is not even available then there has to be a manual way to update the device, i.e. you could
+download an update when you are on the network, cache it on your phone, or somehow connect with the raspberry pi using some other backup 
+method like a thumb drive or laptop, in either case, the update binary is downloaded ahead of time in a place where there's wan access. 
+thumb drives are no good if the raspberry pi is installed way up on the ceiling or some unreachable area, but if the raspberry pi is 
+accessible, a thumb drive is a pretty good way of updating given that thumb drives are abundant and especially given that the raspberry 
+pi provides 4 usb ports.
+
+TODO: automating upgrades
+
+### desktop background image
+
+### startup screen
+
+instead of looking at 4 raspberries plus a bunch of log information from dmesg, perhaps you'd like a custom startup progress indicator 
+or something with your device's logo.
+
+### wake on lan
+
+### logging and debugability
 
