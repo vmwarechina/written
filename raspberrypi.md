@@ -8,19 +8,20 @@ foundation merely suggests that you mention their product on your pages and this
 
 ## use case
 
-for my use case, the clock/scoreboard needed to be an asynchronous service that could support multiple simultaneous client connections 
-for reads and writes.  i originally thought about creating a mobile application connected to a service in the cloud, but for my digital
-clock/scoreboard, i needed millisecond accuracy, the lag over wan would be a non-starter, lan is tolerable.  second, for mobile 
-applications, a phone call or other distractions would disrupt the service, remember this needs to be connected to an led monitor, you 
-wouldn't want people to see your private sms or facebook messages popping up as notifications in the middle of a game.  and lastly, 
-running a service on a mobile phone is not the right place, how would other clients connect to a device that's often times wading 
-through different ip addresses or potentially using mobile networks?  on top of the service, i needed a desktop environment that could 
-display a browser.  the device also needs to handle storage and playback of various media like high resolution video and photos.
+for my use case, the clock/scoreboard needed to be an asynchronous service that could support multiple client connections (long term) 
+with frequent reads and writes.  i originally thought about creating a mobile application connected to a service in the cloud, 
+but for my digital clock/scoreboard, i needed millisecond accuracy, the lag over wan would be a non-starter, lan is tolerable, otherwise 
+the clock would look like it's jittery and jumping all over the place.  second, for mobile applications, a phone call or other 
+distractions would disrupt the service, remember this needs to be connected to an led monitor, you wouldn't want people to see your 
+private sms or facebook messages popping up as notifications in the middle of a game.  and lastly, running a service on a mobile phone 
+is not the right place, how would other clients connect to a device that's often times wading through different ip addresses or 
+potentially using mobile networks?  on top of the service, i needed a desktop environment that could display a browser.  the device also 
+needs to handle storage and playback of various media like high resolution video, audio, and photos.
 
 to control the clock/scoreboard service, i needed a mobile application, iphone and android being the obvious platforms to support so
 the backend had to support both of these.  i developed a swift ios application initially and used an apple tv to airplay the
 content, but that would require an apple tv device which adds costs to the solution and would not allow me to support android clients
-in the future.  plus this would make the mobile client really shouldn't be overloaded into a server side backend.
+in the future.
 
 ## hardware stack
 
@@ -67,15 +68,28 @@ licensing costs turned me off.
 there are other distributions, like diet pi, which is actually a tool to help you build a customized linux for arm, but just too much 
 work at this point, i just wanted to get my scoreboard up and running, maybe an exercise for later.
 
+the operating system image needs to be installed onto a microsd card, for me, my main development platform is a macbook pro (usb-c) 
+which doesn't have a microsd reader so i had to go purchase a usb to microsd dongle, it also happened to have ports for memory stick, sd 
+cards, and other card formats.
+
+to get os images onto the raspberry pi, initially i used the dd command line tool, but i found a gui tool that works perfectly across 
+multiple platforms (linux, mac, windows) called [etcher][https://etcher.io/].  i highly recommend this tool, i think they also have a 
+hardware device that can simultaneously burn os images onto multiple microsd cards, you could build a mini-factory to ship large amounts 
+of raspberry pi devices in this manner.
+
 ### backend server
 
 i had learned golang around the time i started this project and decided to create a websocket server to manage the clock/scoreboard, 
-this would allow clients to update data asynchronously.  one really nice thing about golang is that you can compile and copy a binary 
-directly to the target platform, you don't really need to install a golang compiler (or runtime) onto the device which would save me 
-space and complexity (think upgrades of golang, having to have source code on the device itself, git pull's, etc).  all persistent data 
-is stored to an sqlite file, my data requirements are not large, probably a few thousand to at most a million rows over 5 or so tables.
+this would allow clients to update and receive data asynchronously.  one really nice thing about golang is that you can compile and copy 
+a binary  directly to the target platform, you don't really need to install a golang compiler (or runtime) onto the device which would 
+save me space and complexity (think upgrades to golang, having to have source code on the device itself, git pull's, etc).  all 
+persistent data is stored to an sqlite file, i didn't want to have another database process running as my data requirements are not 
+large, probably a few thousand to at most a million rows over 5 or so simple tables.
 
-there also needed to be a web server to serve up static pages, i just bundled this together with the websocket server using golang.
+there also needed to be a web server to serve up static pages, i just bundled this together with the golang websocket server.
+
+this backend server needs to be started automatically everytime the device is started or if the process crashes.  i leveraged systemd to 
+start the process automatically and restart if the process goes down.
 
 ### desktop browser
 
