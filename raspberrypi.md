@@ -169,7 +169,7 @@ extremely choppy and unviewable on raspberry pi's.  what i did find out is that 
 that's also ported to ubuntu-mate called omxplayer, it's a command line tool which is perfect for my case as i could call this from my 
 static page/websocket server.
 
-omxplayer has a way to pipe in commands such as pausing the video, etc.
+omxplayer has a way to pipe commands asynchronously such as pausing or stopping the video using linux [d-bus](https://www.freedesktop.org/wiki/Software/dbus/).  i didn't leverage this yet as i basically fork a command from golang to run omxplayer.  each time a video is played a forked process, but i think d-bus is definitely the cleaner method moving forward, just a time trade off.
 
 ### desktop background image
 
