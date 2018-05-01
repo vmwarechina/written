@@ -201,7 +201,7 @@ i'm sure it's not terribly difficult, but at the moment i have a local build scr
 available locally then compiles the golang application, stores it into a .deb binary.  you can actually cross-compile golang, so for 
 example if i need an arm based golang binary, i can still compile on an x86 by setting GOOS and GOARCH environment variables.
 
-`GOOS=linux GOARCH=arm7 go build`
+`GOOS=linux GOARCH=arm go build`
 
 there's a nice summary from [digital ocean](https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04) on how to cross compile golang applications for your platform.
 
