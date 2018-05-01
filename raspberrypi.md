@@ -67,7 +67,10 @@ to build up kubernetes clusters.  microsoft has windows iot, but just the though
 licensing costs turned me off.
 
 there are other distributions, like diet pi, which is actually a tool to help you build a customized linux for arm, but just too much 
-work at this point, i just wanted to get my scoreboard up and running, maybe an exercise for later.
+work at this point, i just wanted to get my scoreboard up and running, maybe an exercise for later.  for the record, raspbian apparently 
+has a raspbian lite distribution with pretty much a bare bones linux installed, you could add packages as you like.  the other way is to 
+install something like ubuntu-mate and then work backwards and remove what you don't like, i think this method is like taking a step 
+backwards because you're installing and then un-installing.
 
 the operating system image needs to be installed onto a microsd card, for me, my main development platform is a macbook pro (usb-c) 
 which doesn't have a microsd reader so i had to go purchase a usb to microsd dongle, it also happened to have ports for memory stick, sd 
@@ -81,6 +84,9 @@ of raspberry pi devices in this manner.
 the base ubuntu-mate image required a few additional packages to be installed:
 
 1.  `sudo apt-get install chromium-browser`
+
+once you have everything tweaked to your liking, operating system plus all the application code and configuration, you can save an image 
+of the entire system and create an image that you can then use etcher to copy onto other microsd cards.
 
 ### backend server
 
@@ -171,7 +177,7 @@ extremely choppy and unviewable on raspberry pi's.  what i did find out is that 
 that's also ported to ubuntu-mate called omxplayer, it's a command line tool which is perfect for my case as i could call this from my 
 static page/websocket server.
 
-omxplayer has a way to pipe commands asynchronously such as pausing or stopping the video using linux [d-bus](https://www.freedesktop.org/wiki/Software/dbus/).  i didn't leverage this yet as i basically fork a command from golang to run omxplayer.  each time a video is played a forked process, but i think d-bus is definitely the cleaner method moving forward, just a time trade off.
+omxplayer has a way to pipe commands asynchronously such as pausing or stopping the video using linux [d-bus](https://www.freedesktop.org/wiki/Software/dbus/).  i didn't leverage this yet as i basically fork a process from golang to run omxplayer.  each time a video is played is a forked process, but i think d-bus is definitely the cleaner method moving forward, just a time trade off.
 
 ### desktop background image
 
@@ -182,9 +188,24 @@ or something with your device's logo.
 
 ### wake on lan
 
+in terms of power, the raspberry pi is relatively energy efficient, but there will be scenarios where you'd want to turn off or suspend 
+the raspberry pi remotely without having to use ssh ideally. 
+
 ### logging and debugability
 
-### packaging
+### build, packaging
 
-naturally on ubuntu apt-get is the best way to package up your code.
+naturally on ubuntu apt-get is the best way to package up your code.  i didn't want to deal with hosting binaries on ubuntu mirrors so 
+i'm distributing .deb package files.  i've actually never gone through the process of hosting debian packages on the ubuntu mirror, and 
+i'm sure it's not terribly difficult, but at the moment i have a local build script that assumes all the updated source files are 
+available locally then compiles the golang application, stores it into a .deb binary.  you can actually cross-compile golang, so for 
+example if i need an arm based golang binary, i can still compile on an x86 by setting GOOS and GOARCH environment variables.
 
+`GOOS=linux GOARCH=arm7 go build`
+
+there's a nice summary from [digital ocean](https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04) on how to cross compile golang applications for your platform.
+
+### conclusion
+
+several things still need tightening up, the linux distribution still has a lot of unused packages that could be cleaned up, this could 
+save storage space, but also reduce your surface area for attacks.
