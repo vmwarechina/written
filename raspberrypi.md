@@ -7,7 +7,7 @@ product-friendly, i.e. you can sell products based on raspberry pi without payin
 foundation merely suggests that you mention their product on your pages or product documentation, and this isn't even a hard 
 requirement.
 
-## use case
+## clock/scoreboard product
 
 for my use case, the clock/scoreboard needs to be an asynchronous service that can support multiple client connections (long term) 
 with frequent reads and writes.  i originally thought about creating a mobile application that connects to a service in the cloud, 
