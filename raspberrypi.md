@@ -35,7 +35,7 @@ energy efficieny are important.
 
 to note, the raspberry pi 3 model b+ was just recently released, i have not gotten my hands on one yet, but everything seems to be a 
 bump up, wifi, bluetooth, cpu (quad core broadcom bcm2837b0, cortex-a53 (v8) 64-bit soc @ 1.4ghz), even ethernet.  i would recommend the 
-e model b+ over the 3 model b since the price is relatively the same.
+3 model b+ over the 3 model b since the price is relatively the same.
 
 there are many other singleboard devices like raspberry pi, like the asus tinker board, orange pi, beagleboard, etc, and i think i heard 
 or read from some review that the raspberry pi is the lower end of the bunch in terms of performance (and price), especially i heard the 
