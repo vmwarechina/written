@@ -175,7 +175,7 @@ omxplayer has a way to pipe commands asynchronously such as pausing or stopping 
 
 ### desktop background image
 
-### startup screen
+### boot screen
 
 instead of looking at 4 raspberries plus a bunch of log information from dmesg, perhaps you'd like a custom startup progress indicator 
 or something with your device's logo.
