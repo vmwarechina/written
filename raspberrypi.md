@@ -4,22 +4,23 @@ one of my recent side projects was to build a digital clock/scoreboard for sport
 to an led monitor as the solution.  i had a lot of fun building this project, but there were lots of tradeoffs and choices so
 here are my experiences for anyone interested in building similar devices.  by the way, the terms of the raspberry pi are extremely
 product-friendly, i.e. you can sell products based on raspberry pi without paying any royalties/license fees, the raspberry pi
-foundation merely suggests that you mention their product on your pages and this isn't even a hard requirement.
+foundation merely suggests that you mention their product on your pages or product documentation, and this isn't even a hard 
+requirement.
 
 ## use case
 
-for my use case, the clock/scoreboard needed to be an asynchronous service that could support multiple client connections (long term) 
-with frequent reads and writes.  i originally thought about creating a mobile application connected to a service in the cloud, 
-but for my digital clock/scoreboard, i needed millisecond accuracy, the lag over wan would be a non-starter, lan is tolerable, otherwise 
+for my use case, the clock/scoreboard needs to be an asynchronous service that can support multiple client connections (long term) 
+with frequent reads and writes.  i originally thought about creating a mobile application that connects to a service in the cloud, 
+but for my digital clock/scoreboard, i need millisecond accuracy, the lag over wan would be a non-starter, lan is tolerable, otherwise 
 the clock would look like it's jittery and jumping all over the place.  second, for mobile applications, a phone call or other 
-distractions would disrupt the service, remember this needs to be connected to an led monitor, you wouldn't want people to see your 
+distraction would disrupt the service, remember this needs to be connected to an led monitor, you wouldn't want people to see your 
 private sms or facebook messages popping up as notifications in the middle of a game.  and lastly, running a service on a mobile phone 
-is not the right place, how would other clients connect to a device that's often times wading through different ip addresses or 
-potentially using mobile networks?  on top of the service, i needed a desktop environment that could display a browser.  the device also 
+is not the right place, how would other clients connect to a device that's frequently wading through different ip addresses or 
+potentially using mobile networks?  on top of the service, i need a desktop environment that can display a browser.  the device also 
 needs to handle storage and playback of various media like high resolution video, audio, and photos.
 
-to control the clock/scoreboard service, i needed a mobile application, iphone and android being the obvious platforms to support so
-the backend had to support both of these.  i developed a swift ios application initially and used an apple tv to airplay the
+to control the clock/scoreboard service, i need a mobile application, iphone and android being the obvious platforms to support so
+the backend has to support both of these.  i developed a swift ios application initially and used an apple tv to airplay the
 content, but that would require an apple tv device which adds costs to the solution and would not allow me to support android clients
 in the future.
 
