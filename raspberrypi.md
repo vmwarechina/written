@@ -184,3 +184,7 @@ or something with your device's logo.
 
 ### logging and debugability
 
+### packaging
+
+naturally on ubuntu apt-get is the best way to package up your code.
+
