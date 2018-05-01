@@ -124,10 +124,11 @@ you need to run a few commands to get this loaded by systemd
 the goal of the device is to spin up linux really quickly, automatically login so that there's no prompting for username/password, 
 start up chrome browser in full screen mode, and point at the very first page of the scoreboard.
 
-to accomplish this, i had to first enable automatic login for this particular account, this can be done from the ubuntu user and 
-password manager gui. 
+to accomplish this, i had to first enable automatic login for a linux user, this can be done from the ubuntu user and 
+password manager gui. TODO:
 
-the next step is to add an xorg autostart configuration file into the account that gets logged into automatically.
+the next step is to leverage linux [autostart](https://www.freedesktop.org/wiki/Specifications/autostart-spec/) to start the chromium 
+browser.
 
 i added the file /home/mboard/.config/autostart/mboard.desktop
 
