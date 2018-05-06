@@ -185,10 +185,18 @@ omxplayer has a way to pipe commands asynchronously such as pausing or stopping 
 
 ### desktop background image
 
+`sudo gsettings set org.gnome.desktop.background picture-uri "file://home/mboard/splash.001.png"`
+
 ### boot screen
 
 instead of looking at 4 raspberries plus a bunch of log information from dmesg, perhaps you'd like a custom startup progress 
-indicator or something with your device's logo.
+indicator or something with your device's logo.  ubuntu leverages a bootloader called grub, modify this file to show the 
+splashscreen for ubuntu:
+
+`sudo vi /etc/default/grub`
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+
 
 ### wake on lan
 
