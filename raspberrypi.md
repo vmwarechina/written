@@ -209,6 +209,10 @@ example if i need an arm based golang binary, i can still compile on an x86 by s
 
 there's a nice summary from [digital ocean](https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04) on how to cross compile golang applications for your platform.
 
+### final stack
+
+![Alt text](https://github.com/stephenhu/written/blob/master/mboard-stack.001.png)
+
 ### conclusion
 
 several things still need tightening up, the linux distribution still has a lot of unused packages that could be cleaned up, this could 
