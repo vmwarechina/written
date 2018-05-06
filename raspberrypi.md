@@ -85,6 +85,7 @@ build a mini-factory to ship large amounts of raspberry pi devices in this manne
 the base ubuntu-mate image required a few additional packages to be installed:
 
 1.  `sudo apt-get install chromium-browser`
+1.  `sudo apt-get install openssh-server`
 
 once you have everything tweaked to your liking, operating system plus all the application code and configuration, you can 
 save an image of the entire system and create an image that you can then use etcher to copy onto other microsd cards.
