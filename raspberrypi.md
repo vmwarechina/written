@@ -46,63 +46,65 @@ my needs, things seem to work well.
 
 ### operating system
 
-in terms of operating systems, i've always liked using linux and the recommended system on raspberry pi is raspbian, this is a debian
-based linux distribution, but its purpose is specifically to create a desktop environment for schools or those learning to use
-computers, there were lots of applications like libre office that just weren't needed, the size required for install was roughly 4g
-and it used a strange windowing system.
+in terms of operating systems, i've always liked using linux and the recommended system on raspberry pi is raspbian, this is 
+a debian based linux distribution, but its purpose is specifically to create a desktop environment for education, 
+programming, or general use, there were lots of applications like mathematica that just weren't needed, the size required 
+for install was over 4gb and the default window manager is something called [lxde](http://lxde.org) which is quite 
+lightweight.  note that there's also a window-less version of raspbian called raspbian lite, the total download size for 
+this is around 325mb which is quite acceptable, from there you can add the packages that you need.
 
-i ended up using ubuntu-mate which required 8g storage, though also debian based, but this seemed much more familiar to me, it was 
-running 16.04 LTS, unity as the window system and the menus and everything seemed fairly familiar.
+i ended up using ubuntu-mate which required 8g storage, though also debian based, but this seemed much more familiar to me, 
+it was running 16.04 LTS, unity as the window system and the menus and everything seemed fairly familiar.
 
 i looked at ubuntu core, which was built for iot devices, but ubuntu core leverages docker which was just overkill for this
-project, i'd need additional memory for the docker processes, and there was this whole thing about forcing you to create docker images
-and put them up on some snap service which required registration that just turned me entirely off.  i never measured how much more
-resources i needed to run docker, but with 1g ram, it just didn't seem necessary.  i also i host a web application that needs to be 
-displayed via a browser, so was an awkward match.  the ubuntu core itself was quite minimalized, but the deep, ingrained docker 
-dependency was a non-starter for me.  i like the concept of a minimalized linux with just enough to run your workload, but i'd have to 
-load window manager, xorg, etc. 
+project, i'd need additional memory for the docker processes, and there was this whole thing about forcing you to create 
+docker images and put them up on some snap service which required registration that just turned me entirely off.  i never 
+measured how much more nresources i needed to run docker, but with 1g ram, it just didn't seem necessary.  i also host a web 
+application that needs to be displayed via a browser, so docker was an awkward match.  the ubuntu core itself was quite 
+minimalized, but the deep, ingrained docker dependency was a non-starter for me.  i like the concept of a minimalized linux 
+with just enough to run your workload, but i'd have to load window manager, xorg, etc. 
 
-i also looked at fedora atomic, this is similar to ubuntu core--in addition to docker, k8 was built in as well and seems to serve as way 
-to build up kubernetes clusters.  microsoft has windows iot, but just the thought of having to develop on windows and the potential 
-licensing costs turned me off.
+i also looked at fedora atomic, this is similar to ubuntu core--in addition to docker, k8 was built in as well and seems to 
+serve as a way to build up kubernetes clusters.  microsoft has windows iot, but just the thought of having to develop on 
+windows and the potential licensing costs turned me off.
 
-there are other distributions, like diet pi, which is actually a tool to help you build a customized linux for arm, but just too much 
-work at this point, i just wanted to get my scoreboard up and running, maybe an exercise for later.  for the record, raspbian apparently 
-has a raspbian lite distribution with pretty much a bare bones linux installed, you could add packages as you like.  the other way is to 
-install something like ubuntu-mate and then work backwards and remove what you don't like, i think this method is like taking a step 
-backwards because you're installing and then un-installing.
+there are other distributions, like diet pi, which is actually a tool to help you build a customized linux for arm, but just 
+too much work at this point, i just wanted to get my scoreboard up and running, maybe an exercise for later.  the other way 
+to tighten up the install is to install something like ubuntu-mate and then work backwards and remove what you don't like, i 
+think this method is like taking a step backwards because you're installing and then un-installing.
 
-the operating system image needs to be installed onto a microsd card, for me, my main development platform is a macbook pro (usb-c) 
-which doesn't have a microsd reader so i had to go purchase a usb to microsd dongle, it also happened to have ports for memory stick, sd 
-cards, and other card formats.
+the operating system image needs to be installed onto a microsd card, for me, my main development platform is a macbook pro 
+(usb-c) which doesn't have a microsd reader so i had to go purchase a usb to microsd dongle, it also happened to have ports 
+for memory stick, sd cards, and other card formats, i guess these are usually referred to as a multi-card reader.
 
-to get os images onto the raspberry pi, initially i used the dd command line tool, but i found a gui tool that works perfectly across 
-multiple platforms (linux, mac, windows) called [etcher](https://etcher.io/).  i highly recommend this tool, i think they also have a 
-hardware device that can burn os images onto multiple microsd cards in parallel, you could build a mini-factory to ship large amounts 
-of raspberry pi devices in this manner.
+to get os images onto the raspberry pi, initially i used the dd command line tool, but i found a gui tool that works 
+perfectly across multiple platforms (linux, mac, windows) called [etcher](https://etcher.io/).  i highly recommend this 
+tool, i think they also have a hardware device that can burn os images onto multiple microsd cards in parallel, you could 
+build a mini-factory to ship large amounts of raspberry pi devices in this manner.
 
 the base ubuntu-mate image required a few additional packages to be installed:
 
 1.  `sudo apt-get install chromium-browser`
 
-once you have everything tweaked to your liking, operating system plus all the application code and configuration, you can save an image 
-of the entire system and create an image that you can then use etcher to copy onto other microsd cards.
+once you have everything tweaked to your liking, operating system plus all the application code and configuration, you can 
+save an image of the entire system and create an image that you can then use etcher to copy onto other microsd cards.
 
 ### backend server
 
-i had learned golang around the time i started this project and decided to create a websocket server to manage the clock/scoreboard, 
-this would allow clients to update and receive data asynchronously.  one really nice thing about golang is that you can compile and copy 
-a binary directly to the target platform, you don't really need to install a golang compiler (or runtime) onto the device which would 
-save me space and complexity (think upgrades to golang, having to have source code on the device itself, git pull's, etc).  all 
-persistent data is stored to an sqlite file, i didn't want to have another database process running as my data requirements are not 
-large, probably a few thousand to at most a million rows over 5 or so simple tables.
+i had learned golang around the time i started this project and decided to create a websocket server to manage the 
+clock/scoreboard, this would allow clients to update and receive data asynchronously.  one really nice thing about golang is 
+that you can compile and copy a binary directly to the target platform, you don't really need to install a golang compiler 
+(or runtime) onto the device which would save me space and complexity (think upgrades to golang, having to have source code 
+on the device itself, git pull's, etc).  all persistent data is stored to an sqlite file, i didn't want to have another 
+database process running as my data requirements are not large, probably a few thousand to at most a million rows over 5 or 
+so simple tables, so an embedded storage system was preferred.
 
-there also needed to be a web server to serve up static pages (html, css, js), i just bundled this together with the golang websocket 
-server.
+there also needed to be a web server to serve up static pages (html, css, js), i just bundled this together with the golang 
+websocket server.
 
-and last, but not least, this backend server needs to be started automatically everytime the device is started or if the process 
-crashes.  i leveraged systemd to start the process automatically and restart if the process goes down.  here's my systemd configuration 
-file from /etc/systemd/system/mboard.service
+and last, but not least, this backend server needs to be started automatically everytime the device is started or if the 
+process crashes.  i leveraged systemd to start the process automatically and restart if the process goes down.  here's my 
+systemd configuration file from /etc/systemd/system/mboard.service
 
 ```
 [Unit]
@@ -127,14 +129,14 @@ you need to run a few commands to get this loaded by systemd
 
 ### browser application startup
 
-the goal of the device is to spin up linux really quickly, automatically login so that there's no prompting for username/password, 
-start up chrome browser in full screen mode, and point at the very first page of the scoreboard.
+the goal of the device is to spin up linux really quickly, automatically login so that there's no prompting for 
+username/password, start up chrome browser in full screen mode, and point at the very first page of the scoreboard.
 
 to accomplish this, i had to first enable automatic login for a linux user, this can be done from the ubuntu user and 
 password manager gui. TODO:
 
-the next step is to leverage linux [autostart](https://www.freedesktop.org/wiki/Specifications/autostart-spec/) to start the chromium 
-browser.
+the next step is to leverage linux [autostart](https://www.freedesktop.org/wiki/Specifications/autostart-spec/) to start the 
+chromium browser.
 
 i added the file /home/mboard/.config/autostart/mboard.desktop
 
@@ -183,13 +185,13 @@ omxplayer has a way to pipe commands asynchronously such as pausing or stopping 
 
 ### boot screen
 
-instead of looking at 4 raspberries plus a bunch of log information from dmesg, perhaps you'd like a custom startup progress indicator 
-or something with your device's logo.
+instead of looking at 4 raspberries plus a bunch of log information from dmesg, perhaps you'd like a custom startup progress 
+indicator or something with your device's logo.
 
 ### wake on lan
 
-in terms of power, the raspberry pi is relatively energy efficient, but there will be scenarios where you'd want to turn off or suspend 
-the raspberry pi remotely without having to use ssh ideally. 
+in terms of power, the raspberry pi is relatively energy efficient, but there will be scenarios where you'd want to turn off 
+or suspend the raspberry pi remotely without having to use ssh ideally. 
 
 ### logging and debugability
 
