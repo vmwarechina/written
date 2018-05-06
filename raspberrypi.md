@@ -49,9 +49,10 @@ my needs, things seem to work well.
 in terms of operating systems, i've always liked using linux and the recommended system on raspberry pi is raspbian, this is 
 a debian based linux distribution, but its purpose is specifically to create a desktop environment for education, 
 programming, or general use, there were lots of applications like mathematica that just weren't needed, the size required 
-for install was over 4gb and the default window manager is something called [lxde](http://lxde.org) which is quite 
-lightweight.  note that there's also a window-less version of raspbian called raspbian lite, the total download size for 
-this is around 325mb which is quite acceptable, from there you can add the packages that you need.
+for install was over 4gb and the default window manager is something called pixel which stands for pi improved xwindows 
+environment lightweight which is based on [lxde](http://lxde.org).  note that there's also a window-less version of raspbian 
+called raspbian lite, the total download size for this is around 325mb which is quite acceptable, from there you can add the 
+packages that you need.
 
 i ended up using ubuntu-mate which required 8g storage, though also debian based, but this seemed much more familiar to me, 
 it was running 16.04 LTS, unity as the window system and the menus and everything seemed fairly familiar.
