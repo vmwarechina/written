@@ -1,6 +1,6 @@
 # building product w/ raspberry pi
 
-one of my recent side projects was to build a digital clock/scoreboard for sports.  i decided to use a raspberry pi model 3b connected
+one of my recent side projects was to build a digital timer/scoreboard for sports.  i decided to use a raspberry pi model 3b connected
 to an led monitor as the solution.  i had a lot of fun building this project, but there were lots of tradeoffs and choices so
 here are my experiences for anyone interested in building similar devices.  by the way, the terms of the raspberry pi are extremely
 product-friendly, i.e. you can sell products based on raspberry pi without paying any royalties/license fees, the raspberry pi
