@@ -55,12 +55,12 @@ called raspbian lite, the total download size for this is around 325mb which is 
 packages that you need.
 
 i tried ubuntu-mate which required 8g storage, though also debian based, but this seemed much more familiar to me, 
-it was running 16.04 LTS, gnome 3 as the window manager and the menus and everything seemed fairly familiar.
+it was running 16.04 LTS, mate (gnome 2) and the menus and everything seemed fairly familiar.
 
 i looked at ubuntu core, which was built for iot devices, but ubuntu core leverages docker which was just overkill for this
 project, i'd need additional memory for the docker processes, and there was this whole thing about forcing you to create 
 docker images and put them up on some snap service which required registration that just turned me entirely off.  i never 
-measured how much more resources i needed to run docker, but with 1g ram, it just didn't seem necessary, i'm not trying to deploy thousands or even hundreds of web applications, it's a couple, and they don't need runtimes to be installed like python or ruby, so this is just unnecessary cruft.  the ubuntu core itself was quite minimalized, but the deep, ingrained docker dependency was a non-starter for me.  i like the concept of a minimalized linux with just enough to run your workload, but i'd have to load window manager, xorg, browser, etc, so it's not a headless setup. 
+measured how much more resources i needed to run docker, but with 1g ram, it just didn't seem necessary, i'm not trying to deploy thousands or even hundreds of web applications, it's a couple, and they don't need runtimes to be installed like python or ruby, so this is just unnecessary cruft.  the ubuntu core itself was quite minimalized, but the deep, ingrained docker dependency was a non-starter for me.  i like the concept of a minimalized linux with just enough to run your workload, but i'd have to load window manager, xorg, browser, etc, so it's not only a headless setup. 
 
 i also looked at fedora atomic, this is similar to ubuntu core--in addition to docker, k8 was built in as well and seems to 
 serve as a way to build up kubernetes clusters.  microsoft has windows iot, but just the thought of having to develop on 
@@ -75,6 +75,8 @@ the operating system image needs to be installed onto a microsd card, for me, my
 (usb-c) which doesn't have a microsd reader so i had to go purchase a usb to microsd dongle, it also happened to have ports 
 for memory stick, sd cards, and other card formats, i guess these are usually referred to as a multi-card reader.
 
+# TODO: screenshot of multi-card reader
+
 to get os images onto the raspberry pi, initially i used the dd command line tool, but i found a gui tool that works 
 perfectly across multiple platforms (linux, mac, windows) called [etcher](https://etcher.io/).  i highly recommend this 
 tool, i think they also have a hardware device that can burn os images onto multiple microsd cards in parallel, you could 
@@ -87,12 +89,17 @@ the base ubuntu-mate image required a few additional packages to be installed:
 
 in the end, i used raspbian-lite with lxde, the interface is actually very similar to mate (gnome 3) and seems to be built for lightweightness.
 
-TODO: raspi-config and install instructions for lxde
+1.  `sudo apt-get install xinit xserver-org`
+1.  `sudo apt-get install lxde-core`
+1.  `sudo apt-get install lightdm`
+1.  `sudo apt-get install chromium-browser`
+
+# TODO: raspi-config
 
 once you have everything tweaked to your liking, operating system plus all the application code and configuration, you can 
 save an image of the entire system and create an image that you can then use etcher to copy onto other microsd cards.
 
-TODO: dd command
+# TODO: dd command
 
 ### backend server
 
