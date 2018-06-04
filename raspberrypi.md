@@ -1,6 +1,6 @@
 # building product w/ raspberry pi
 
-one of my recent side projects was to build a digital timer/scoreboard for sports.  i decided to use a raspberry pi model 3b connected
+one of my recent side projects was to build a digital scoreboard for sports.  i decided to use a raspberry pi model 3b connected
 to an led monitor as the solution.  i had a lot of fun building this project, but there were lots of tradeoffs and choices so
 here are my experiences for anyone interested in building similar devices.  by the way, the terms of the raspberry pi are extremely
 product-friendly, i.e. you can sell products based on raspberry pi without paying any royalties/license fees, the raspberry pi
@@ -9,8 +9,8 @@ requirement.
 
 ## scoreboard product
 
-for my use case, i wanted to build an advanced digital scoreboard for sports, basically allow controlling a game/shot clock and score.  the scoreboard needs to be an asynchronous service that can support multiple client connections (long term) 
-with frequent reads and writes.  i originally thought about creating a mobile application that connects to a service in the cloud, 
+for my use case, the scoreboard needs to be an asynchronous service that can support multiple client connections (long term) 
+with frequent reads and writes to control the score and game clock.  i originally thought about creating a mobile application that connects to a service in the cloud, 
 but for my digital scoreboard, i need millisecond accuracy, the lag over wan would be a non-starter, lan is tolerable, otherwise 
 the clock would look like it's jittery and jumping all over the place.  second, for mobile applications, a phone call or other 
 distraction would disrupt the service, remember this needs to be connected to an led monitor, you wouldn't want people to see your 
