@@ -54,16 +54,13 @@ environment lightweight which is based on [lxde](http://lxde.org).  note that th
 called raspbian lite, the total download size for this is around 325mb which is quite acceptable, from there you can add the 
 packages that you need.
 
-i ended up using ubuntu-mate which required 8g storage, though also debian based, but this seemed much more familiar to me, 
-it was running 16.04 LTS, unity as the window system and the menus and everything seemed fairly familiar.
+i tried ubuntu-mate which required 8g storage, though also debian based, but this seemed much more familiar to me, 
+it was running 16.04 LTS, gnome 3 as the window manager and the menus and everything seemed fairly familiar.
 
 i looked at ubuntu core, which was built for iot devices, but ubuntu core leverages docker which was just overkill for this
 project, i'd need additional memory for the docker processes, and there was this whole thing about forcing you to create 
 docker images and put them up on some snap service which required registration that just turned me entirely off.  i never 
-measured how much more nresources i needed to run docker, but with 1g ram, it just didn't seem necessary.  i also host a web 
-application that needs to be displayed via a browser, so docker was an awkward match.  the ubuntu core itself was quite 
-minimalized, but the deep, ingrained docker dependency was a non-starter for me.  i like the concept of a minimalized linux 
-with just enough to run your workload, but i'd have to load window manager, xorg, etc. 
+measured how much more resources i needed to run docker, but with 1g ram, it just didn't seem necessary, i'm not trying to deploy thousands or even hundreds of web applications, it's a couple, and they don't need runtimes to be installed like python or ruby, so this is just unnecessary cruft.  the ubuntu core itself was quite minimalized, but the deep, ingrained docker dependency was a non-starter for me.  i like the concept of a minimalized linux with just enough to run your workload, but i'd have to load window manager, xorg, browser, etc, so it's not a headless setup. 
 
 i also looked at fedora atomic, this is similar to ubuntu core--in addition to docker, k8 was built in as well and seems to 
 serve as a way to build up kubernetes clusters.  microsoft has windows iot, but just the thought of having to develop on 
@@ -88,8 +85,14 @@ the base ubuntu-mate image required a few additional packages to be installed:
 1.  `sudo apt-get install chromium-browser`
 1.  `sudo apt-get install openssh-server`
 
+in the end, i used raspbian-lite with lxde, the interface is actually very similar to mate (gnome 3) and seems to be built for lightweightness.
+
+TODO: raspi-config and install instructions for lxde
+
 once you have everything tweaked to your liking, operating system plus all the application code and configuration, you can 
 save an image of the entire system and create an image that you can then use etcher to copy onto other microsd cards.
+
+TODO: dd command
 
 ### backend server
 
