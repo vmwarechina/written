@@ -135,9 +135,9 @@ WantedBy=multi-user.target
 
 you need to run a few commands to get this loaded by systemd
 
-`sudo systemctl enable mboard`
-`sudo systemctl start mboard`
-`sudo systemctl status mboard`
+1. `sudo systemctl enable mboard`
+1. `sudo systemctl start mboard`
+1. `sudo systemctl status mboard`
 
 ### browser application startup
 
