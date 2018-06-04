@@ -7,11 +7,11 @@ product-friendly, i.e. you can sell products based on raspberry pi without payin
 foundation merely suggests that you mention their product on your pages or product documentation, and this isn't even a hard 
 requirement.
 
-## clock/scoreboard product
+## scoreboard product
 
-for my use case, the clock/scoreboard needs to be an asynchronous service that can support multiple client connections (long term) 
+for my use case, i wanted to build an advanced digital scoreboard for sports, basically allow controlling a game/shot clock and score.  the scoreboard needs to be an asynchronous service that can support multiple client connections (long term) 
 with frequent reads and writes.  i originally thought about creating a mobile application that connects to a service in the cloud, 
-but for my digital clock/scoreboard, i need millisecond accuracy, the lag over wan would be a non-starter, lan is tolerable, otherwise 
+but for my digital scoreboard, i need millisecond accuracy, the lag over wan would be a non-starter, lan is tolerable, otherwise 
 the clock would look like it's jittery and jumping all over the place.  second, for mobile applications, a phone call or other 
 distraction would disrupt the service, remember this needs to be connected to an led monitor, you wouldn't want people to see your 
 private sms or facebook messages popping up as notifications in the middle of a game.  and lastly, running a service on a mobile phone 
@@ -19,7 +19,7 @@ is not the right place, how would other clients connect to a device that's frequ
 potentially using mobile networks?  on top of the service, i need a desktop environment that can display a browser.  the device also 
 needs to handle storage and playback of various media like high resolution video, audio, and photos.
 
-to control the clock/scoreboard service, i need a mobile application, iphone and android being the obvious platforms to support so
+to control the scoreboard service, i need a mobile application, iphone and android being the obvious platforms to support so
 the backend has to support both of these.  i developed a swift ios application initially and used an apple tv to airplay the
 content, but that would require an apple tv device which adds costs to the solution and would not allow me to support android clients
 in the future.
@@ -30,7 +30,7 @@ i chose raspberry pi because i had heard a lot of great things about it, it's qu
 always wanted to play around with one of these.  the raspberry pi 3 model b is based on an arm (v7) quad core 1.2ghz broadcom bcm2837 
 64-bit processor for low power consumption, includes hdmi output, 1g ram, onboard wifi router, the ability to use microsd cards for 
 storage, is quite expandable with 4k cameras, sensors, etc, and the size and form factor are just about right, like the size of a non-4k 
-apple tv device.  for my digital clock/scoreboard, this could hang on the wall or ceiling of an indoor basketball gym so size and 
+apple tv device.  for my digital scoreboard, this could hang on the wall or ceiling of an indoor basketball gym so size and 
 energy efficieny are important.
 
 to note, the raspberry pi 3 model b+ was just recently released, i have not gotten my hands on one yet, but everything seems to be a 
