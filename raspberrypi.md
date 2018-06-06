@@ -105,7 +105,7 @@ i had learned golang around the time i started this project and decided to creat
 clock/scoreboard, this would allow clients to update and receive data asynchronously.  one really nice thing about golang is 
 that you can compile and copy a binary directly to the target platform, you don't really need to install a golang compiler 
 (or runtime) onto the device which would save me space and complexity (think upgrades to golang, having to have source code 
-on the device itself, git pull's, etc).  all persistent data is stored to an sqlite file, i didn't want to have another 
+on the device itself, git pull's, etc), golang binaries are all inclusive, all dependencies linked into the single binary which makes the binaries larger, but obviously during runtime, it dynamically links in only the necessary pieces.  all persistent data is stored to an sqlite file, i didn't want to have another 
 database process running as my data requirements are not large, probably a few thousand to at most a million rows over 5 or 
 so simple tables, so an embedded storage system was preferred.
 
