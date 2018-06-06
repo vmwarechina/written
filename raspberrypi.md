@@ -67,7 +67,7 @@ serve as a way to build up kubernetes clusters.  microsoft has windows iot, but 
 windows and the potential licensing costs turned me off.
 
 there are other distributions, like [diet pi](https://dietpi.com/), which is actually a tool to help you build a customized linux for arm, but just 
-too much work at this point, i just wanted to get my scoreboard up and running, maybe an exercise for later.  and [armbian](https://www.armbian.com/) which deserves special mention, this is another minimalized linux for arm based on debian.  the other way to tighten up the install is to install something like ubuntu-mate and then work backwards and remove what you don't like, i think this method is like taking a step backwards because you're installing and then un-installing.
+too much work at this point, i just wanted to get my scoreboard up and running, maybe an exercise for later.  and [armbian](https://www.armbian.com/) deserves special mention, this is another minimalized linux for arm based on debian.  the other way to tighten up the install is to install something like ubuntu-mate and then work backwards and remove what you don't like, i think this method is like taking a step backwards because you're installing and then un-installing.
 
 the operating system image needs to be installed onto a microsd card, for me, my main development platform is a macbook pro 
 (usb-c) which doesn't have a microsd reader so i had to go purchase a usb to microsd dongle, it also happened to have ports 
